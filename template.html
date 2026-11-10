@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>会计学博士高校教职面试专业知识题</title>
+<style>
+:root{
+  --bg:#f4f5f7; --card:#ffffff; --ink:#1a1d24; --sub:#6b7280;
+  --line:#e6e8ec; --accent:#0f6b5c; --accent2:#0a4f44; --warn:#b45309;
+  --ok:#0f6b5c; --vague:#b45309; --forgot:#b91c1c; --soft:#eef4f2;
+  --radius:14px; --shadow:0 1px 3px rgba(16,24,40,.06),0 1px 2px rgba(16,24,40,.04);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  background:var(--bg); color:var(--ink); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 12px 96px}
+header{
+  position:sticky;top:0;z-index:50;background:var(--card);
+  border-bottom:1px solid var(--line); padding:12px 14px 0;
+}
+header h1{font-size:18px;margin:0 0 2px;letter-spacing:.5px}
+header .sub{font-size:12px;color:var(--sub);margin:0 0 10px}
+.tabs{display:flex;gap:4px;overflow-x:auto;padding-bottom:10px}
+.tabs button{
+  flex:1 0 auto;border:1px solid var(--line);background:#fff;color:var(--sub);
+  padding:8px 14px;border-radius:999px;font-size:14px;cursor:pointer;white-space:nowrap;
+}
+.tabs button.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.view{display:none;padding-top:14px}
+.view.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:14px 16px;margin-bottom:12px}
+.card h3{margin:0 0 6px;font-size:16px}
+.hint{font-size:12px;color:var(--sub);margin:4px 0 12px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;
+  padding:9px 14px;font-size:14px;cursor:pointer;font-weight:500;
+}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.block{width:100%}
+.btn:active{opacity:.82}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.muted{color:var(--sub)}
+.small{font-size:13px}
+.tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:12px;
+  background:var(--soft);color:var(--accent2);margin-right:6px}
+/* 模块折叠 */
+.mod{border:1px solid var(--line);border-radius:var(--radius);background:#fff;margin-bottom:10px;overflow:hidden}
+.mod-head{display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:13px 15px;cursor:pointer;background:#fff}
+.mod-head .n{font-weight:600;font-size:15px}
+.mod-head .cnt{font-size:12px;color:var(--sub);flex-shrink:0}
+.mod-head .arrow{transition:.2s;color:var(--sub);flex-shrink:0}
+.mod.open .arrow{transform:rotate(90deg)}
+.mod-desc{font-size:13px;color:var(--sub);padding:0 15px 10px;border-bottom:1px solid var(--line);margin-top:-4px}
+.mod-body{display:none}
+.mod.open .mod-body{display:block}
+.q{padding:12px 15px;border-bottom:1px solid var(--line);cursor:pointer}
+.q:last-child{border-bottom:none}
+.q .qid{font-size:11px;color:var(--accent);font-weight:700;margin-right:6px}
+.q .qt{font-size:14px}
+.q.open{background:#fafbfc}
+.q-ans{display:none;padding:2px 15px 14px;background:#fafbfc}
+.q.open .q-ans{display:block}
+.lbl{font-size:12px;font-weight:700;color:var(--accent2);margin:10px 0 3px}
+.ans-txt{font-size:14px;white-space:pre-wrap;word-break:break-word}
+.follow{background:#fff7ed;border:1px solid #fde8cd;border-radius:10px;padding:9px 12px;margin-top:8px;font-size:13px}
+/* 考察卡片 */
+.flash{background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:18px 16px;margin-bottom:14px}
+.flash .qnum{font-size:12px;color:var(--sub);margin-bottom:8px}
+.flash .qtext{font-size:17px;font-weight:600;margin-bottom:6px}
+.flash .qid-lg{font-size:12px;color:var(--accent);font-weight:700}
+.flash-ans{display:none;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+.flash.show .flash-ans{display:block}
+.grade{display:flex;gap:8px;margin-top:14px}
+.grade button{flex:1;padding:11px 4px;border-radius:10px;border:1px solid var(--line);
+  font-size:14px;font-weight:600;cursor:pointer;background:#fff}
+.grade .g-ok{color:var(--ok);border-color:#bfd9d3}
+.grade .g-vague{color:var(--vague);border-color:#ecd9c0}
+.grade .g-forgot{color:var(--forgot);border-color:#ecc8c8}
+.progress{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin:12px 0}
+.progress i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:.3s}
+.stat{display:flex;gap:10px;font-size:12px;color:var(--sub);flex-wrap:wrap}
+.stat b{color:var(--ink)}
+/* 检验 */
+.check-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px 16px;margin-bottom:14px;text-align:center}
+.check-card .qtext{font-size:18px;font-weight:600;margin:6px 0 20px}
+.two{display:flex;gap:12px}
+.two button{flex:1;padding:14px;border-radius:12px;font-size:16px;font-weight:700;border:1px solid var(--line);cursor:pointer}
+.b-rem{background:#e9f5f1;color:var(--ok);border-color:#bfd9d3}
+.b-forget{background:#fdeeee;color:var(--forgot);border-color:#ecc8c8}
+.report h2{margin:0 0 8px}
+.bigscore{font-size:40px;font-weight:800;color:var(--accent);margin:6px 0}
+.legend{font-size:13px;color:var(--sub);margin-bottom:14px}
+/* 真题 */
+.bank-sec h3{margin:0 0 4px;font-size:15px}
+.bank-list{margin:0;padding-left:0;list-style:none}
+.bank-list li{padding:10px 2px;border-bottom:1px solid var(--line);font-size:14px}
+.bank-list li:last-child{border-bottom:none}
+.bank-list .no{color:var(--accent);font-weight:700;margin-right:6px;font-size:12px}
+/* 详情弹层 */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;display:none;
+  align-items:flex-end;justify-content:center}
+.overlay.on{display:flex}
+.sheet{background:#fff;width:100%;max-width:760px;max-height:88vh;border-radius:18px 18px 0 0;
+  overflow-y:auto;padding:18px 16px 30px}
+.sheet h3{margin:0 0 6px;font-size:17px}
+.sheet .close{margin-bottom:10px}
+.sheet .detail{font-size:14px;white-space:pre-wrap;word-break:break-word;color:#2a2e37}
+.sheet .detail .hl{font-weight:700;color:var(--accent2)}
+@media(min-width:600px){.overlay{align-items:center}.sheet{border-radius:var(--radius)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>会计学博士高校教职面试专业知识题</h1>
+  <p class="sub">会计 · 财务管理 · 成本与管理会计 · 审计 · 税法 · 科研方法 · 试讲</p>
+  <div class="tabs" id="tabs">
+    <button data-v="browse" class="on">浏览</button>
+    <button data-v="quiz">考察</button>
+    <button data-v="check">检验</button>
+    <button data-v="bank">真题</button>
+    <button data-v="more">更多</button>
+  </div>
+</header>
+
+<!-- 浏览 -->
+<section class="view on" id="view-browse">
+  <div class="card">
+    <h3 style="margin-bottom:6px">备考总览</h3>
+    <div id="weights" class="small"></div>
+    <div class="lbl">30秒回答结构</div>
+    <div class="ans-txt small" id="s30"></div>
+    <div class="lbl">90秒回答结构</div>
+    <div class="ans-txt small" id="s90"></div>
+  </div>
+  <div id="modules"></div>
+</section>
+
+<!-- 考察 -->
+<section class="view" id="view-quiz">
+  <div class="card">
+    <div class="row" style="align-items:center;justify-content:space-between">
+      <select id="quiz-mod" class="btn small"></select>
+      <label class="small muted" style="display:flex;align-items:center;gap:6px">
+        <input type="checkbox" id="quiz-all"> 包含已记住
+      </label>
+    </div>
+    <div class="progress" style="margin-top:12px"><i id="quiz-bar" style="width:0%"></i></div>
+    <div class="stat" id="quiz-stat"></div>
+  </div>
+  <div id="quiz-flash"></div>
+  <button class="btn primary block" id="quiz-restart">重新开始本组</button>
+</section>
+
+<!-- 检验 -->
+<section class="view" id="view-check">
+  <div class="card">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <span class="small muted">快速回忆：只看题目，判断是否记得</span>
+      <select id="check-mod" class="btn small"></select>
+    </div>
+    <div class="progress" style="margin-top:12px"><i id="check-bar" style="width:0%"></i></div>
+    <div class="stat" id="check-stat"></div>
+  </div>
+  <div id="check-body"></div>
+</section>
+
+<!-- 真题 -->
+<section class="view" id="view-bank">
+  <div class="card"><div class="small muted">以下为上传《2027届财务类岗位面试真题》原题线索（保留题目表述，未附原答案）。可分篇浏览，也可切换到「考察」用同一套卡片自测。</div></div>
+  <div id="bank-body"></div>
+</section>
+
+<!-- 更多 -->
+<section class="view" id="view-more">
+  <div class="card">
+    <h3>重点15分钟试讲题目</h3>
+    <div id="lectures"></div>
+  </div>
+  <div class="card">
+    <h3>12道现场口试模拟题</h3>
+    <div id="mocks"></div>
+  </div>
+  <div class="card">
+    <h3>13张原始题库纠错卡</h3>
+    <div id="corrections"></div>
+  </div>
+  <div class="card">
+    <h3>入校面试前7天执行清单</h3>
+    <div id="plan7"></div>
+  </div>
+</section>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="sheet">
+    <button class="btn block" onclick="closeSheet()">关闭</button>
+    <div id="sheet-body"></div>
+  </div>
+</div>
+
+<script>
+const DATA = __DATA_JSON__;
+
+// ---------------- 工具 ----------------
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = {
+  get(k, d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+const allQs = () => DATA.modules.flatMap(m => m.questions);
+
+// ---------------- 标签切换 ----------------
+function switchView(v){
+  $$('.view').forEach(x=>x.classList.remove('on'));
+  $('#view-'+v).classList.add('on');
+  $$('#tabs button').forEach(b=>b.classList.toggle('on', b.dataset.v===v));
+}
+
+// ---------------- 浏览 ----------------
+function renderOverview(){
+  $('#weights').innerHTML = DATA.overview.weights.map(w=>
+    `<div style="display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-bottom:1px solid var(--line)">
+      <span>${esc(w.k)}</span><b style="color:var(--accent)">${esc(w.w)}</b></div>
+      <div class="muted" style="font-size:12px;margin:2px 0 6px">${esc(w.v)}</div>`).join('');
+  $('#s30').textContent = DATA.overview.struct30;
+  $('#s90').textContent = DATA.overview.struct90;
+}
+function renderModules(){
+  $('#modules').innerHTML = DATA.modules.map((m,mi)=>{
+    const qs = m.questions.map((q,qi)=>`
+      <div class="q" data-m="${mi}" data-q="${qi}">
+        <div class="qt"><span class="qid">${esc(q.id)}</span>${esc(q.title)}</div>
+        <div class="q-ans">
+          <div class="lbl">答题要点</div>
+          <div class="ans-txt">${esc(q.answer||'—')}</div>
+          <div class="lbl">追问 / 易错</div>
+          <div class="follow">${esc(q.followup||'—')}</div>
+          ${q.detail?`<div style="margin-top:10px"><button class="btn small" onclick="openDetail('${esc(q.id)}')">查看详解</button></div>`:''}
+        </div>
+      </div>`).join('');
+    return `<div class="mod" data-m="${mi}">
+      <div class="mod-head" onclick="toggleMod(this)">
+        <span class="n">${esc(m.name)}</span>
+        <span class="cnt">${m.questions.length} 题</span>
+        <span class="arrow">▸</span>
+      </div>
+      <div class="mod-desc">${esc(m.desc||'')}</div>
+      <div class="mod-body">${qs}</div>
+    </div>`;
+  }).join('');
+}
+function toggleMod(el){
+  el.parentElement.classList.toggle('open');
+}
+document.addEventListener('click', e=>{
+  if(e.target.closest('.btn')) return;
+  const q = e.target.closest('.q');
+  if(q){ q.classList.toggle('open'); return; }
+});
+
+// ---------------- 详解弹层 ----------------
+function openDetail(id){
+  const q = allQs().find(x=>x.id===id);
+  if(!q || !q.detail) return;
+  const txt = q.detail.replace(/(90秒标准答案|标准答案|最终记忆口诀|记忆口诀)/g, '\n◆ $1');
+  $('#sheet-body').innerHTML = `<h3>${esc(q.id)} ${esc(q.title)}</h3>
+    <div class="detail">${esc(txt)}</div>`;
+  $('#overlay').classList.add('on');
+}
+function closeSheet(){ $('#overlay').classList.remove('on'); }
+
+// ---------------- 考察 ----------------
+let quizQueue = [], quizDone = 0, quizTotal = 0, quizCur = null;
+const STATUS = {ok:'记住了', vague:'模糊', forgot:'忘了'};
+
+function buildQuiz(){
+  const mod = $('#quiz-mod').value;
+  const includeAll = $('#quiz-all').checked;
+  const status = store.get('kb_status', {});
+  let pool = allQs().filter(q => (mod==='all'||q.id.startsWith(mod)));
+  if(!includeAll) pool = pool.filter(q => status[q.id] !== 'ok');
+  // 顺序：忘了在前，模糊次之，未学在后
+  const order = {'forgot':0,'vague':1};
+  pool.sort((a,b)=> (order[status[a.id]]??2) - (order[status[b.id]]??2));
+  quizQueue = pool;
+  quizDone = 0; quizTotal = pool.length;
+  quizCur = null;
+  renderQuizStat();
+  nextQuiz();
+}
+function renderQuizStat(){
+  const status = store.get('kb_status', {});
+  const ok = allQs().filter(q=>status[q.id]==='ok').length;
+  const vague = allQs().filter(q=>status[q.id]==='vague').length;
+  const forgot = allQs().filter(q=>status[q.id]==='forgot').length;
+  const rest = allQs().length - ok - vague - forgot;
+  $('#quiz-stat').innerHTML =
+    `<span>共 <b>${allQs().length}</b> 题</span><span style="color:var(--ok)">已记住 <b>${ok}</b></span>`+
+    `<span style="color:var(--vague)">模糊 <b>${vague}</b></span>`+
+    `<span style="color:var(--forgot)">忘了 <b>${forgot}</b></span><span>未学 <b>${rest}</b></span>`;
+  $('#quiz-bar').style.width = quizTotal? (quizDone/quizTotal*100)+'%' : '0%';
+}
+function nextQuiz(){
+  if(!quizQueue.length){
+    $('#quiz-flash').innerHTML = `<div class="flash" style="text-align:center">
+      <div style="font-size:40px;margin-bottom:8px">🎉</div>
+      <div class="qtext">本组题目已完成</div>
+      <div class="muted small">没记住的题目会自动保留，下次继续。</div></div>`;
+    return;
+  }
+  quizCur = quizQueue.shift();
+  const q = quizCur;
+  $('#quiz-flash').innerHTML = `
+    <div class="flash" id="flash">
+      <div class="qnum">第 ${quizDone+1} / ${quizTotal} 题</div>
+      <div class="qid-lg">${esc(q.id)}</div>
+      <div class="qtext">${esc(q.title)}</div>
+      <button class="btn primary block" onclick="revealFlash()">显示答案</button>
+      <div class="flash-ans">
+        <div class="lbl">答题要点</div><div class="ans-txt">${esc(q.answer||'—')}</div>
+        <div class="lbl">追问 / 易错</div><div class="follow">${esc(q.followup||'—')}</div>
+        ${q.detail?`<div style="margin-top:10px"><button class="btn small" onclick="openDetail('${esc(q.id)}')">查看详解</button></div>`:''}
+        <div class="grade">
+          <button class="g-ok" onclick="grade('ok')">记住了</button>
+          <button class="g-vague" onclick="grade('vague')">模糊</button>
+          <button class="g-forgot" onclick="grade('forgot')">忘了</button>
+        </div>
+      </div>
+    </div>`;
+}
+function revealFlash(){ $('#flash').classList.add('show'); }
+function grade(s){
+  const status = store.get('kb_status', {});
+  status[quizCur.id] = s;
+  store.set('kb_status', status);
+  quizDone++;
+  renderQuizStat();
+  nextQuiz();
+}
+
+// ---------------- 检验 ----------------
+let checkQueue = [], checkTotal = 0, checkPos = 0, remembered = [];
+function buildCheck(){
+  const mod = $('#check-mod').value;
+  checkQueue = allQs().filter(q => (mod==='all'||q.id.startsWith(mod)));
+  // 随机打乱
+  checkQueue = shuffle(checkQueue);
+  checkTotal = checkQueue.length; checkPos = 0; remembered = [];
+  renderCheckStat();
+  nextCheck();
+}
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function renderCheckStat(){
+  $('#check-bar').style.width = checkTotal? (checkPos/checkTotal*100)+'%' : '0%';
+  $('#check-stat').innerHTML = `<span>进度 <b>${checkPos}</b> / ${checkTotal}</span><span>已记 <b>${remembered.length}</b></span>`;
+}
+function nextCheck(){
+  if(checkPos >= checkTotal){
+    const forgot = checkQueue.filter(q=>!remembered.includes(q.id));
+    const pct = checkTotal? Math.round(remembered.length/checkTotal*100) : 0;
+    $('#check-body').innerHTML = `<div class="card report">
+      <h2>记忆检验结果</h2>
+      <div class="bigscore">${pct}%</div>
+      <div class="legend">共 ${checkTotal} 题，你记得 ${remembered.length} 题，还有 <b style="color:var(--forgot)">${forgot.length}</b> 题没记住。</div>
+      ${forgot.length? '<div class="lbl" style="text-align:left">没记住的题目（点击展开答案）</div>'+forgot.map(q=>`
+        <div class="q" style="text-align:left">
+          <div class="qt"><span class="qid">${esc(q.id)}</span>${esc(q.title)}</div>
+          <div class="q-ans">
+            <div class="lbl">答题要点</div><div class="ans-txt">${esc(q.answer||'—')}</div>
+            <div class="lbl">追问 / 易错</div><div class="follow">${esc(q.followup||'—')}</div>
+          </div>
+        </div>`).join(''): '<div class="muted" style="text-align:center;padding:10px">全部记住了，很棒！</div>'}
+      <button class="btn primary block" style="margin-top:12px" onclick="buildCheck()">再测一次</button>
+    </div>`;
+    return;
+  }
+  const q = checkQueue[checkPos];
+  $('#check-body').innerHTML = `
+    <div class="check-card">
+      <div class="qnum">${checkPos+1} / ${checkTotal}</div>
+      <div class="qid-lg">${esc(q.id)}</div>
+      <div class="qtext">${esc(q.title)}</div>
+      <div class="two">
+        <button class="b-rem" onclick="markCheck(true)">记得</button>
+        <button class="b-forget" onclick="markCheck(false)">不记得</button>
+      </div>
+    </div>`;
+}
+function markCheck(ok){
+  if(ok) remembered.push(checkQueue[checkPos].id);
+  checkPos++;
+  renderCheckStat();
+  nextCheck();
+}
+
+// ---------------- 真题 ----------------
+function renderBank(){
+  $('#bank-body').innerHTML = DATA.bank.map(sec=>`
+    <div class="card bank-sec">
+      <h3>${esc(sec.name)} <span class="muted small">${sec.questions.length} 题</span></h3>
+      <ul class="bank-list">${sec.questions.map((t,i)=>`<li><span class="no">${i+1}</span>${esc(t)}</li>`).join('')}</ul>
+    </div>`).join('');
+}
+
+// ---------------- 更多 ----------------
+function renderMore(){
+  $('#lectures').innerHTML = DATA.overview.lectures.map(l=>`
+    <div style="padding:8px 0;border-bottom:1px solid var(--line)">
+      <b style="font-size:14px">${esc(l.t)}</b>
+      <div class="muted small">${esc(l.d)}</div>
+    </div>`).join('');
+  $('#mocks').innerHTML = DATA.mocks.map(m=>`
+    <div class="q"><div class="qt"><span class="qid">${esc(m.id)}</span>${esc(m.title)}</div>
+      <div class="q-ans"><div class="lbl">回答路线</div><div class="ans-txt">${esc(m.text)}</div></div>
+    </div>`).join('');
+  $('#corrections').innerHTML = DATA.corrections.map(c=>`
+    <div class="q"><div class="qt"><span class="qid">纠错${esc(c.id)}</span>${esc(c.title)}</div>
+      <div class="q-ans"><div class="lbl">规范表述</div><div class="ans-txt">${esc(c.text)}</div></div>
+    </div>`).join('');
+  $('#plan7').innerHTML = DATA.plan7.map(p=>`
+    <div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)">
+      <b style="color:var(--accent);flex-shrink:0;width:40px">${esc(p.day)}</b>
+      <div><div style="font-size:14px">${esc(p.task)}</div>
+      <div class="muted small">${esc(p.result)}</div></div>
+    </div>`).join('');
+}
+
+// ---------------- 初始化 ----------------
+function initSelects(){
+  const opts = [{v:'all',t:'全部模块'}].concat(DATA.modules.map(m=>({
+    v: m.questions[0].id.slice(0,2),
+    t: m.name.replace(/｜.*/,'')
+  })));
+  const html = opts.map(o=>`<option value="${esc(o.v)}">${esc(o.t)}</option>`).join('');
+  $('#quiz-mod').innerHTML = html;
+  $('#check-mod').innerHTML = html;
+}
+
+$('#tabs').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  switchView(b.dataset.v);
+  if(b.dataset.v==='quiz') buildQuiz();
+  if(b.dataset.v==='check') buildCheck();
+});
+$('#quiz-mod').addEventListener('change', buildQuiz);
+$('#quiz-all').addEventListener('change', buildQuiz);
+$('#check-mod').addEventListener('change', buildCheck);
+$('#quiz-restart').addEventListener('click', buildQuiz);
+$('#overlay').addEventListener('click', e=>{ if(e.target.id==='overlay') closeSheet(); });
+
+renderOverview();
+renderModules();
+renderBank();
+renderMore();
+initSelects();
+</script>
+</body>
+</html>
